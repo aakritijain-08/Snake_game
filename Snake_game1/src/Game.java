@@ -17,7 +17,7 @@ Game() {
 
 public static void main(String[] args) {
 
-    // Creates a new thread so our GUI can process itself
+    // new thread created (GUI can work)
     EventQueue.invokeLater(new Runnable() {
         @Override
         public void run() {

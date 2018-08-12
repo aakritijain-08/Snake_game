@@ -1,16 +1,16 @@
 public class Food {
 
 private Snake snake = new Snake();
-private int foodX; // Stores X pos of our food
-private int foodY; // Stores Y pos of our food
+private int foodX; // position_food ----x---
+private int foodY; // position_food ----y---
 
-// Used to determine random position of food
+// for random position of food(each time different)
 private final int RANDOMPOSITION = 40;
 
 
 public void createFood() {
 
-    // Set our food's x & y position to a random position
+    // give x and y some random position of food 
 
     int location = (int) (Math.random() * RANDOMPOSITION);
     foodX = ((location * Board.getDotSize()));

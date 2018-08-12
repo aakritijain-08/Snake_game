@@ -1,17 +1,17 @@
 public class Snake {
 
-// Stores the joints / body part locations for our snake
+// snake_body
 private final int[] x = new int[Board.getAllDots()];
 private final int[] y = new int[Board.getAllDots()];
 
-// Stores direction of our snake
+// snake_direction
 private boolean movingLeft = false;
 private boolean movingRight = false;
 private boolean movingUp = false;
 private boolean movingDown = false;
 
-private int joints = 0; // Stores # of dots / joints the snake has (starts
-                        // with 3)
+private int joints = 0; // the no of joints the snake has initially is 3 and then it adds up
+                      
 
 public int getSnakeX(int index) {
     return x[index];
@@ -72,30 +72,28 @@ public void setJoints(int j) {
 public void move() {
     for (int i = joints; i > 0; i--) {
 
-        // Moves the joints of the snake 'up the chain'
-        // Meaning, the joint of the snake all move up one
+        // joint increased or say up by 1
         x[i] = x[(i - 1)];
         y[i] = y[(i - 1)];
     }
 
-    // Moves snake to the left
+    // snake_direction -> left
     if (movingLeft) {
         x[0] -= Board.getDotSize();
     }
-    // To the right
+    // snake_direction -> right
     if (movingRight) {
         x[0] += Board.getDotSize();
     }
-    // Down
+    // snake_direction -> down
     if (movingDown) {
         y[0] += Board.getDotSize();
     }
-    // And finally up
+    // snake_direction -> up
     if (movingUp) {
         y[0] -= Board.getDotSize();
     }
 
-    // Dotsize represents the size of the joint, so a pixel of DOTSIZE
-    // gets added on to the snake in that direction
+    // here the dot size is the joint ...it adds up in the snake length 
 }
  }

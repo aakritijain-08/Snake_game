@@ -18,32 +18,31 @@ public class Board extends JPanel implements ActionListener {
 
 // TODO: Implement a way for the player to win
 
-// Holds height and width of the window
+// dimension_window
 private final static int BOARDWIDTH = 1000;
 private final static int BOARDHEIGHT = 980;
 
-// Used to represent pixel size of food & our snake's joints
+// joint size of snake and food 
 private final static int PIXELSIZE = 25;
 
 // The total amount of pixels the game could possibly have.
-// We don't want less, because the game would end prematurely.
-// We don't more because there would be no way to let the player win.
+// We don't want less, because the game would end before.
+// We don't more because then theres no chance for player to win.
 
 private final static int TOTALPIXELS = (BOARDWIDTH * BOARDHEIGHT)
         / (PIXELSIZE * PIXELSIZE);
 
-// Check to see if the game is running
+// check game_running 
 private boolean inGame = true;
 
-// Timer used to record tick times
+// Timer for recording 
 private Timer timer;
 
-// Used to set game speed, the lower the #, the faster the snake travels
-// which in turn
-// makes the game harder.
-private static int speed = 45;
+// game speed ...lower the value higher the speed 
+// and game would be hard to finish
+private static int speed = 55;
 
-// Instances of our snake & food so we can use their methods
+// Instances --> snake and food 
 private Snake snake = new Snake();
 private Food food = new Food();
 
@@ -58,7 +57,7 @@ public Board() {
     initializeGame();
 }
 
-// Used to paint our components to the screen
+// paint components on screen 
 @Override
 protected void paintComponent(Graphics g) {
     super.paintComponent(g);
@@ -66,28 +65,28 @@ protected void paintComponent(Graphics g) {
     draw(g);
 }
 
-// Draw our Snake & Food (Called on repaint()).
+// Draw Snake & Food (Called on repaint()).
 void draw(Graphics g) {
     // Only draw if the game is running / the snake is alive
     if (inGame == true) {
         g.setColor(Color.green);
         g.fillRect(food.getFoodX(), food.getFoodY(), PIXELSIZE, PIXELSIZE); // food
 
-        // Draw our snake.
+        // Draw_snake.
         for (int i = 0; i < snake.getJoints(); i++) {
-            // Snake's head
+            // snake_head
             if (i == 0) {
                 g.setColor(Color.RED);
                 g.fillRect(snake.getSnakeX(i), snake.getSnakeY(i),
                         PIXELSIZE, PIXELSIZE);
-                // Body of snake
+                // Snake_body
             } else {
                 g.fillRect(snake.getSnakeX(i), snake.getSnakeY(i),
                         PIXELSIZE, PIXELSIZE);
             }
         }
 
-        // Sync our graphics together
+        // Sync graphics
         Toolkit.getDefaultToolkit().sync();
     } else {
         // If we're not alive, then we end our game
@@ -97,41 +96,41 @@ void draw(Graphics g) {
 
 void initializeGame() {
     snake.setJoints(3); // set our snake's initial size
-
-    // Create our snake's body
+//in our case its 3
+    //create snake_body
     for (int i = 0; i < snake.getJoints(); i++) {
         snake.setSnakeX(BOARDWIDTH / 2);
         snake.setSnakeY(BOARDHEIGHT / 2);
     }
-    // Start off our snake moving right
+    // initial snake_direction ---> right
     snake.setMovingRight(true);
 
-    // Generate our first 'food'
+    // first food 
     food.createFood();
 
-    // set the timer to record our game's speed / make the game move
+    // timer to record games speed
     timer = new Timer(speed, this);
     timer.start();
 }
 
-// if our snake is in the close proximity of the food..
+// when snake is near the food like in close area
 void checkFoodCollisions() {
 
     if ((proximity(snake.getSnakeX(0), food.getFoodX(), 20))
             && (proximity(snake.getSnakeY(0), food.getFoodY(), 20))) {
 
         System.out.println("intersection");
-        // Add a 'joint' to our snake
+        // add joint to snake
         snake.setJoints(snake.getJoints() + 1);
         // Create new food
         food.createFood();
     }
 }
 
-// Used to check collisions with snake's self and board edges
+// check self_collision and collision to board edges
 void checkCollisions() {
 
-    // If the snake hits its' own joints..
+    // if self_collision
     for (int i = snake.getJoints(); i > 0; i--) {
 
         // Snake cant intersect with itself if it's not larger than 5
@@ -159,7 +158,7 @@ void checkCollisions() {
         inGame = false;
     }
 
-    // If the game has ended, then we can stop our timer
+    // if game ends timer stops 
     if (!inGame) {
         timer.stop();
     }
@@ -172,7 +171,7 @@ void endGame(Graphics g) {
 
 
 // new font
-    Font font = new Font("Times New Roman", Font.BOLD, 14);
+    Font font = new Font("COMIC SANS ", Font.BOLD, 80);
     FontMetrics metrics = getFontMetrics(font);
 
 //color and font
